@@ -15,3 +15,12 @@ services:
     volumes:
       - /app/node_modules
       - .:/app
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    # Override the starting command when the test service is created
+    command: ["npm", "run", "test"]
