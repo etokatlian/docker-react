@@ -1,26 +1,26 @@
-# The purpose of docker-compose is to simplify the docker run process of setting up a container.
-# Sometimes the commands you have to type in the terminal can get really lengthy and the docker-compose file simplifies that.
-# The equivalent of the file below in the TERMINAL would be something like :
-  # docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app <image_id>
+# # The purpose of docker-compose is to simplify the docker run process of setting up a container.
+# # Sometimes the commands you have to type in the terminal can get really lengthy and the docker-compose file simplifies that.
+# # The equivalent of the file below in the TERMINAL would be something like :
+#   # docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app <image_id>
 
-version: '3'
-services:
-  web:
-    build: 
-      # Context option specifies where we want all the files and folder for this image to be pulled from
-      context: .
-      dockerfile: Dockerfile.dev
-    ports: 
-      - "3000:3000"
-    volumes:
-      - /app/node_modules
-      - .:/app
-  tests:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /app/node_modules
-      - .:/app
-    # Override the starting command when the test service is created
-    command: ["npm", "run", "test"]
+# version: '3'
+# services:
+#   web:
+#     build: 
+#       # Context option specifies where we want all the files and folder for this image to be pulled from
+#       context: .
+#       dockerfile: Dockerfile.dev
+#     ports: 
+#       - "3000:3000"
+#     volumes:
+#       - /app/node_modules
+#       - .:/app
+#   tests:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.dev
+#     volumes:
+#       - /app/node_modules
+#       - .:/app
+#     # Override the starting command when the test service is created
+#     command: ["npm", "run", "test"]
