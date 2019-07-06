@@ -1,13 +1,22 @@
-# Must have super user permissions
 sudo: required
 services:
-  # Install docker into container
   - docker
 
-# Gets executed before tests get run or deployment
 before_install:
   - docker build -t etokatlian/docker-react -f Dockerfile.dev .
 
-# The command needed to actually run test suite
 script:
   - docker run etokatlian/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-west-2-992787353719"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
